@@ -15,7 +15,7 @@ class Room {
       required this.consumingDescription,
       required this.iconData});
 
-  RoomEntity toRoomEntity() {
+  RoomEntity genereteRoomEntity() {
     return RoomEntity(
         name: name,
         deviceCount: deviceCount,
