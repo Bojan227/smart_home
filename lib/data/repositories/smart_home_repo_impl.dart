@@ -35,7 +35,12 @@ class SmartHomeRepositoryImpl implements SmartHomeRepository {
     ];
 
     List<RoomEntity> roomsMapped = rooms.map((room) {
-      return room.genereteRoomEntity();
+      return RoomEntity(
+          name: room.name,
+          deviceCount: room.deviceCount,
+          status: room.status,
+          consumingDescription: room.consumingDescription,
+          icon: Icon(room.iconData));
     }).toList();
 
     return Future.value(roomsMapped);
