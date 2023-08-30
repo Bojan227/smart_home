@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_home/presentation/blocs/home/cubit/tab_cubit.dart';
+import 'package:smart_home/presentation/ui/home/widgets/bottom_nav_bar.dart';
 import 'package:smart_home/presentation/ui/home/widgets/consumption_card.dart';
 import 'package:smart_home/presentation/ui/home/widgets/rooms_list.dart';
 import 'package:smart_home/presentation/ui/home/widgets/tab_row.dart';
@@ -16,6 +17,10 @@ class HomeScreen extends StatelessWidget {
     final mainConfig = Theme.of(context).extension<MainConfig>()!;
 
     return Scaffold(
+      bottomNavigationBar: BlocProvider(
+        create: (context) => TabCubit(),
+        child: const BottomNavBar(),
+      ),
       body: Container(
         padding: EdgeInsets.symmetric(
             vertical: 34, horizontal: mainConfig.homeScreenPadding!),
