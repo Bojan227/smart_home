@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_home/presentation/blocs/home/cubit/tab_cubit.dart';
 import 'package:smart_home/presentation/ui/home/widgets/consumption_card.dart';
+import 'package:smart_home/presentation/ui/home/widgets/tab_row.dart';
 import 'package:smart_home/theme/main_config.dart';
 import 'package:smart_home/theme/text_theme.dart';
 
@@ -14,7 +17,8 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Material(
         child: Container(
-          padding: EdgeInsets.all(mainConfig.homeScreenPadding!),
+          padding: EdgeInsets.symmetric(
+              vertical: 24, horizontal: mainConfig.homeScreenPadding!),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -37,7 +41,14 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 16,
               ),
-              const ConsumptionCard()
+              const ConsumptionCard(),
+              const SizedBox(
+                height: 22,
+              ),
+              BlocProvider(
+                create: (context) => TabCubit(),
+                child: const TabRow(),
+              )
             ],
           ),
         ),
