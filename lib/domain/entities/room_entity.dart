@@ -5,7 +5,7 @@ class RoomEntity {
   final int deviceCount;
   final bool status;
   final String consumingDescription;
-  final Icon icon;
+  final IconData icon;
 
   RoomEntity(
       {required this.name,

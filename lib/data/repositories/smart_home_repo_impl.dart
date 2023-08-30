@@ -46,7 +46,7 @@ class SmartHomeRepositoryImpl implements SmartHomeRepository {
           deviceCount: room.deviceCount,
           status: room.status,
           consumingDescription: room.consumingDescription,
-          icon: Icon(room.iconData));
+          icon: room.iconData);
     }).toList();
 
     return Future.value(roomsMapped);

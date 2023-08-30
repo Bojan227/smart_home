@@ -71,7 +71,7 @@ class ColourPalette extends ThemeExtension<ColourPalette> {
     spunPearl: colorFromHex('#A2A9B8'),
     lightGrayishBlue: colorFromHex('#EAEDF2'),
     white: colorFromHex('#FFFFFF'),
-    whiteWithOpacity: colorFromHex('#FFFFFF').withOpacity(0.2),
+    whiteWithOpacity: colorFromHex('#FFFFFF').withOpacity(0.1),
     darkBlueWithOpacity: colorFromHex('#171935').withOpacity(0.6),
   );
 }

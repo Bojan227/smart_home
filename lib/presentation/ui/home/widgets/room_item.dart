@@ -1,13 +1,27 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:smart_home/domain/entities/room_entity.dart';
+import 'package:smart_home/presentation/ui/home/widgets/icon_bubble.dart';
 import 'package:smart_home/theme/colour_palette.dart';
 import 'package:smart_home/theme/main_config.dart';
 import 'package:smart_home/theme/text_theme.dart';
 
+List<Color> colors = [
+  Colors.teal,
+  Colors.amber,
+  Colors.redAccent,
+  Colors.purple,
+  Colors.lime,
+  Colors.blueGrey
+];
+
 class RoomItem extends StatelessWidget {
-  const RoomItem({super.key, required this.roomEntity});
+  RoomItem({super.key, required this.roomEntity});
 
   final RoomEntity roomEntity;
+
+  final Random random = Random();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +41,9 @@ class RoomItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    roomEntity.icon,
+                    IconBubble(
+                        icon: roomEntity.icon,
+                        color: colors[random.nextInt(colors.length)]),
                     const SizedBox(
                       height: 16,
                     ),

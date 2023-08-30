@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_home/presentation/ui/home/widgets/icon_bubble.dart';
 import 'package:smart_home/theme/colour_palette.dart';
 import 'package:smart_home/theme/text_theme.dart';
 
@@ -20,18 +21,7 @@ class ConsumptionInfo extends StatelessWidget {
 
     return Row(
       children: [
-        Container(
-          width: 56,
-          height: 56,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(62),
-            color: colourPalette.whiteWithOpacity,
-          ),
-          child: Icon(
-            icon,
-            color: colourPalette.white,
-          ),
-        ),
+        IconBubble(icon: icon, color: colourPalette.white!),
         const SizedBox(
           width: 12,
         ),
