@@ -21,44 +21,46 @@ class HomeScreen extends StatelessWidget {
         create: (context) => TabCubit(),
         child: const BottomNavBar(),
       ),
-      body: Container(
-        padding: EdgeInsets.symmetric(
-            vertical: 34, horizontal: mainConfig.homeScreenPadding!),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CircleAvatar(),
-                Icon(
-                  Icons.notifications_outlined,
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 18,
-            ),
-            Text(
-              'Hello, Emmanuel',
-              style: textTheme.title,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            const ConsumptionCard(),
-            const SizedBox(
-              height: 22,
-            ),
-            BlocProvider(
-              create: (context) => TabCubit(),
-              child: const TabRow(),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            const RoomsList()
-          ],
+      body: SafeArea(
+        child: Container(
+          padding:
+              EdgeInsets.symmetric(horizontal: mainConfig.homeScreenPadding!),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CircleAvatar(),
+                  Icon(
+                    Icons.notifications_outlined,
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 18,
+              ),
+              Text(
+                'Hello, Emmanuel',
+                style: textTheme.title,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              const ConsumptionCard(),
+              const SizedBox(
+                height: 22,
+              ),
+              BlocProvider(
+                create: (context) => TabCubit(),
+                child: const TabRow(),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              const RoomsList()
+            ],
+          ),
         ),
       ),
     );
