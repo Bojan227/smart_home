@@ -31,6 +31,12 @@ class SmartHomeRepositoryImpl implements SmartHomeRepository {
           deviceCount: 3,
           status: true,
           consumingDescription: 'Consuming 7 kWh',
+          iconData: const IconData(0xe0cf, fontFamily: 'MaterialIcons')),
+      Room(
+          name: 'Bathroom',
+          deviceCount: 3,
+          status: true,
+          consumingDescription: 'Consuming 7 kWh',
           iconData: const IconData(0xe0cf, fontFamily: 'MaterialIcons'))
     ];
 

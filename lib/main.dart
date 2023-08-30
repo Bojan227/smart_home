@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_home/core/injector.dart';
+import 'package:smart_home/presentation/blocs/home/rooms/rooms_bloc.dart';
 import 'package:smart_home/presentation/ui/home/home_screen.dart';
 import 'package:smart_home/theme/colour_palette.dart';
 import 'package:smart_home/theme/main_config.dart';
 import 'package:smart_home/theme/text_theme.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await setupInjector();
   runApp(const MyApp());
 }
 
@@ -13,6 +19,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final RoomsBloc roomsBloc = getIt<RoomsBloc>();
+
     return MaterialApp(
       title: 'Smart Home',
       theme: ThemeData.light().copyWith(
@@ -22,7 +30,10 @@ class MyApp extends StatelessWidget {
             CustomTextTheme.textTheme,
             MainConfig.mainConfig
           ]),
-      home: const HomeScreen(),
+      home: BlocProvider(
+        create: (context) => roomsBloc..add(GetRooms()),
+        child: const HomeScreen(),
+      ),
     );
   }
 }
