@@ -11,7 +11,7 @@ class BottomNavBar extends StatelessWidget {
     final colourPalette = Theme.of(context).extension<ColourPalette>()!;
 
     return BottomNavigationBar(
-      currentIndex: context.read<TabCubit>().state,
+      currentIndex: context.watch<TabCubit>().state,
       elevation: 0,
       showSelectedLabels: false,
       showUnselectedLabels: false,
