@@ -36,10 +36,10 @@ class CustomTextTheme extends ThemeExtension<CustomTextTheme> {
       return this;
     }
     return CustomTextTheme(
-        title: title,
-        bodyLarge: bodyLarge,
-        bodyMedium: bodyMedium,
-        labelMedium: labelMedium);
+        title: TextStyle.lerp(title, other.title, t)!,
+        bodyLarge: TextStyle.lerp(bodyLarge, other.bodyLarge, t)!,
+        bodyMedium: TextStyle.lerp(bodyMedium, other.bodyMedium, t)!,
+        labelMedium: TextStyle.lerp(labelMedium, other.labelMedium, t)!);
   }
 
   static final textTheme = CustomTextTheme(
