@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_home/domain/entities/room_entity.dart';
+import 'package:smart_home/presentation/blocs/home/rooms/rooms_bloc.dart';
 import 'package:smart_home/presentation/ui/home/widgets/icon_bubble.dart';
 import 'package:smart_home/theme/colour_palette.dart';
 import 'package:smart_home/theme/main_config.dart';
@@ -17,9 +19,10 @@ List<Color> colors = [
 ];
 
 class RoomItem extends StatelessWidget {
-  RoomItem({super.key, required this.roomEntity});
+  RoomItem({super.key, required this.roomEntity, required this.index});
 
   final RoomEntity roomEntity;
+  final int index;
 
   final Random random = Random();
 
@@ -64,7 +67,11 @@ class RoomItem extends StatelessWidget {
               ),
               Switch.adaptive(
                 value: roomEntity.status,
-                onChanged: (value) {},
+                onChanged: (value) {
+                  context.read<RoomsBloc>().add(
+                        UpdateRoomStatus(roomId: index),
+                      );
+                },
                 activeColor: colourPalette.white,
                 activeTrackColor: colourPalette.blue,
                 inactiveTrackColor: colourPalette.spunPearl,

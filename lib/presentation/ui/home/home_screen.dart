@@ -5,6 +5,7 @@ import 'package:smart_home/presentation/ui/home/widgets/bottom_nav_bar.dart';
 import 'package:smart_home/presentation/ui/home/widgets/consumption_card.dart';
 import 'package:smart_home/presentation/ui/home/widgets/rooms_list.dart';
 import 'package:smart_home/presentation/ui/home/widgets/tab_row.dart';
+import 'package:smart_home/presentation/ui/room/widgets/slider.dart';
 import 'package:smart_home/theme/main_config.dart';
 import 'package:smart_home/theme/text_theme.dart';
 

@@ -1,28 +1,56 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:smart_home/core/enums.dart';
 import 'package:smart_home/domain/entities/room_entity.dart';
 import 'package:smart_home/domain/usecases/get_rooms_usecase.dart';
+import 'package:smart_home/domain/usecases/update_room_status_usecase.dart';
 
 part 'rooms_event.dart';
 part 'rooms_state.dart';
 
 class RoomsBloc extends Bloc<RoomsEvent, RoomsState> {
-  final GetRoomsUseCase useCase;
+  final GetRoomsUseCase getRoomsUseCase;
+  final UpdateRoomStatusUseCase updateRoomStatusUseCase;
 
-  RoomsBloc({required this.useCase}) : super(RoomsInitial()) {
+  RoomsBloc(
+      {required this.getRoomsUseCase, required this.updateRoomStatusUseCase})
+      : super(const RoomsState(
+            roomsStatus: Status.initial,
+            rooms: [],
+            updateStatus: Status.initial)) {
     on<GetRooms>(_onGetRooms);
+    on<UpdateRoomStatus>(_onUpdateRoomStatus);
   }
 
   Future<void> _onGetRooms(GetRooms event, Emitter emit) async {
-    emit(RoomsLoading());
+    emit(state.copyWith(roomsStatus: Status.loading));
 
     try {
-      final List<RoomEntity> rooms = await useCase.getRooms();
+      final List<RoomEntity> rooms = await getRoomsUseCase.getRooms();
 
-      emit(RoomsLoaded(rooms: rooms));
+      emit(state.copyWith(roomsStatus: Status.success, rooms: rooms));
     } catch (_) {
-      emit(RoomsFailed());
+      emit(state.copyWith(roomsStatus: Status.failure));
+    }
+  }
+
+  Future<void> _onUpdateRoomStatus(UpdateRoomStatus event, Emitter emit) async {
+    emit(state.copyWith(updateStatus: Status.loading));
+
+    try {
+      final RoomEntity room =
+          await updateRoomStatusUseCase.updateRoomStatus(event.roomId);
+
+      List<RoomEntity> copyRooms = List.from(state.rooms);
+      copyRooms[event.roomId] = room;
+
+      emit(state.copyWith(
+        updateStatus: Status.success,
+        rooms: copyRooms,
+      ));
+    } catch (_) {
+      emit(state.copyWith(updateStatus: Status.failure));
     }
   }
 }

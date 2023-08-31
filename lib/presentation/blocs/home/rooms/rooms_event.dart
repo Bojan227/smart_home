@@ -12,3 +12,12 @@ class GetRooms extends RoomsEvent {
   @override
   List<Object?> get props => [];
 }
+
+class UpdateRoomStatus extends RoomsEvent {
+  UpdateRoomStatus({required this.roomId});
+
+  final int roomId;
+
+  @override
+  List<Object?> get props => [roomId];
+}

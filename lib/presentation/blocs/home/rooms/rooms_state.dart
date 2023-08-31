@@ -1,16 +1,28 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of '../rooms/rooms_bloc.dart';
 
-@immutable
-sealed class RoomsState {}
-
-final class RoomsInitial extends RoomsState {}
-
-final class RoomsLoading extends RoomsState {}
-
-final class RoomsLoaded extends RoomsState {
+class RoomsState extends Equatable {
+  final Status roomsStatus;
   final List<RoomEntity> rooms;
+  final Status updateStatus;
 
-  RoomsLoaded({required this.rooms});
+  const RoomsState(
+      {required this.roomsStatus,
+      required this.rooms,
+      required this.updateStatus});
+
+  @override
+  List<Object?> get props => [roomsStatus, rooms, updateStatus];
+
+  RoomsState copyWith({
+    Status? roomsStatus,
+    List<RoomEntity>? rooms,
+    Status? updateStatus,
+  }) {
+    return RoomsState(
+      roomsStatus: roomsStatus ?? this.roomsStatus,
+      rooms: rooms ?? this.rooms,
+      updateStatus: updateStatus ?? this.updateStatus,
+    );
+  }
 }
-
-final class RoomsFailed extends RoomsState {}
