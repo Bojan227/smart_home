@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_home/domain/entities/room_entity.dart';
 import 'package:smart_home/presentation/blocs/home/rooms/rooms_bloc.dart';
-import 'package:smart_home/presentation/ui/home/widgets/icon_bubble.dart';
+import 'package:smart_home/presentation/ui/widgets/icon_bubble.dart';
 import 'package:smart_home/theme/colour_palette.dart';
 import 'package:smart_home/theme/main_config.dart';
 import 'package:smart_home/theme/text_theme.dart';

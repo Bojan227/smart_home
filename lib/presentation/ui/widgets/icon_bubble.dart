@@ -5,19 +5,22 @@ class IconBubble extends StatelessWidget {
     super.key,
     required this.icon,
     required this.color,
+    this.bubbleColor,
   });
 
   final IconData icon;
   final Color color;
+  final Color? bubbleColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.center,
       width: 56,
       height: 56,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(62),
-        color: color.withOpacity(0.1),
+        color: bubbleColor ?? color.withOpacity(0.1),
       ),
       child: Icon(
         icon,
