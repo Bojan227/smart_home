@@ -1,40 +1,79 @@
 import 'package:flutter/cupertino.dart';
+import 'package:smart_home/data/models/device_model.dart';
 import 'package:smart_home/data/models/room_model.dart';
+import 'package:smart_home/domain/entities/device_entity.dart';
 import 'package:smart_home/domain/entities/room_entity.dart';
 
 import 'package:smart_home/domain/repositories/smart_home_repository.dart';
 
+List<Device> devices = [
+  Device(
+    name: 'AC',
+    brand: "Samsung",
+    fullName: "Air Conditioner",
+    consumption: 1.5,
+    status: false,
+    iconData: const IconData(0xe037, fontFamily: 'MaterialIcons'),
+  ),
+  Device(
+    name: 'Lights',
+    status: false,
+    brand: "Hyundai",
+    fullName: "Lights",
+    consumption: 1.1,
+    iconData: const IconData(0xe37b, fontFamily: 'MaterialIcons'),
+  ),
+  Device(
+    name: 'TV',
+    brand: "Fuego",
+    status: false,
+    fullName: "TV",
+    consumption: 2.2,
+    iconData: const IconData(0xe188, fontFamily: 'MaterialIcons'),
+  )
+];
+
 List<Room> rooms = [
   Room(
-      name: 'Bedroom',
-      deviceCount: 6,
-      status: false,
-      consumingDescription: 'Not Consuming',
-      iconData: const IconData(0xe0d7, fontFamily: 'MaterialIcons')),
+    name: 'Bedroom',
+    deviceCount: 6,
+    status: false,
+    consumingDescription: 'Not Consuming',
+    iconData: const IconData(0xe0d7, fontFamily: 'MaterialIcons'),
+    devices: devices,
+  ),
   Room(
-      name: 'Living Room',
-      deviceCount: 12,
-      status: true,
-      consumingDescription: 'Consuming 18 kWh',
-      iconData: const IconData(0xe14d, fontFamily: 'MaterialIcons')),
+    name: 'Living Room',
+    deviceCount: 12,
+    status: true,
+    consumingDescription: 'Consuming 18 kWh',
+    iconData: const IconData(0xe14d, fontFamily: 'MaterialIcons'),
+    devices: devices,
+  ),
   Room(
-      name: 'Kitchen',
-      deviceCount: 8,
-      status: true,
-      consumingDescription: 'Consuming 12 kWh',
-      iconData: const IconData(0xe35e, fontFamily: 'MaterialIcons')),
+    name: 'Kitchen',
+    deviceCount: 8,
+    status: true,
+    consumingDescription: 'Consuming 12 kWh',
+    iconData: const IconData(0xe35e, fontFamily: 'MaterialIcons'),
+    devices: devices,
+  ),
   Room(
-      name: 'Bathroom',
-      deviceCount: 3,
-      status: true,
-      consumingDescription: 'Consuming 7 kWh',
-      iconData: const IconData(0xe0cf, fontFamily: 'MaterialIcons')),
+    name: 'Bathroom',
+    deviceCount: 3,
+    status: true,
+    consumingDescription: 'Consuming 7 kWh',
+    iconData: const IconData(0xe0cf, fontFamily: 'MaterialIcons'),
+    devices: devices,
+  ),
   Room(
-      name: 'Bathroom',
-      deviceCount: 3,
-      status: true,
-      consumingDescription: 'Consuming 7 kWh',
-      iconData: const IconData(0xe0cf, fontFamily: 'MaterialIcons'))
+    name: 'Bathroom',
+    deviceCount: 3,
+    status: true,
+    consumingDescription: 'Consuming 7 kWh',
+    iconData: const IconData(0xe0cf, fontFamily: 'MaterialIcons'),
+    devices: devices,
+  )
 ];
 
 class SmartHomeRepositoryImpl implements SmartHomeRepository {
@@ -47,7 +86,8 @@ class SmartHomeRepositoryImpl implements SmartHomeRepository {
             deviceCount: room.deviceCount,
             status: room.status,
             consumingDescription: room.consumingDescription,
-            icon: room.iconData);
+            icon: room.iconData,
+            devices: deviceMapper(room.devices));
       },
     ).toList();
 
@@ -62,7 +102,8 @@ class SmartHomeRepositoryImpl implements SmartHomeRepository {
         deviceCount: room.deviceCount,
         status: !room.status,
         consumingDescription: room.consumingDescription,
-        iconData: room.iconData);
+        iconData: room.iconData,
+        devices: devices);
 
     rooms[roomId] = updatedRoom;
     RoomEntity roomUpdated = RoomEntity(
@@ -70,8 +111,21 @@ class SmartHomeRepositoryImpl implements SmartHomeRepository {
         deviceCount: room.deviceCount,
         status: !room.status,
         consumingDescription: room.consumingDescription,
-        icon: room.iconData);
+        icon: room.iconData,
+        devices: deviceMapper(room.devices));
 
     return Future.value(roomUpdated);
+  }
+
+  List<DeviceEntity> deviceMapper(List<Device> devices) {
+    return devices
+        .map((device) => DeviceEntity(
+            name: device.name,
+            brand: device.brand,
+            fullName: device.fullName,
+            consumption: device.consumption,
+            iconData: device.iconData,
+            status: device.status))
+        .toList();
   }
 }
