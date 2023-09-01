@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_home/domain/entities/room_entity.dart';
 import 'package:smart_home/presentation/blocs/home/cubit/tab_cubit.dart';
+import 'package:smart_home/presentation/ui/room/widgets/bottom_nav_container.dart';
 import 'package:smart_home/presentation/ui/room/widgets/device_box.dart';
 import 'package:smart_home/presentation/ui/room/widgets/devices_list.dart';
 import 'package:smart_home/presentation/ui/room/widgets/room_header.dart';
@@ -19,10 +20,10 @@ class RoomScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final mainConfig = Theme.of(context).extension<MainConfig>()!;
     final colourPalette = Theme.of(context).extension<ColourPalette>()!;
-
     final int selectedDeviceIndex = context.watch<TabCubit>().state;
 
     return Scaffold(
+      bottomNavigationBar: const BottomNavContainer(),
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
