@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_home/core/enums.dart';
 import 'package:smart_home/presentation/blocs/home/cubit/tab_cubit.dart';
+import 'package:smart_home/presentation/blocs/home/cubit/temperature_cubit.dart';
 import 'package:smart_home/presentation/blocs/home/rooms/rooms_bloc.dart';
 import 'package:smart_home/presentation/ui/home/widgets/room_item.dart';
 import 'package:smart_home/presentation/ui/room/room_screen.dart';
@@ -31,8 +32,12 @@ class RoomsList extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
-                        return BlocProvider(
-                          create: (context) => TabCubit(),
+                        return MultiBlocProvider(
+                          providers: [
+                            BlocProvider(create: (context) => TabCubit()),
+                            BlocProvider(
+                                create: (context) => TemperatureCubit()),
+                          ],
                           child: RoomScreen(room: state.rooms[index]),
                         );
                       },

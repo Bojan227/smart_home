@@ -10,35 +10,37 @@ class ColourPalette extends ThemeExtension<ColourPalette> {
   final Color? white;
   final Color? whiteWithOpacity;
   final Color? darkBlueWithOpacity;
+  final Color? lightGrayishOrange;
 
-  const ColourPalette({
-    required this.blue,
-    required this.orange,
-    required this.darkBlue,
-    required this.spunPearl,
-    required this.lightGrayishBlue,
-    required this.white,
-    required this.whiteWithOpacity,
-    required this.darkBlueWithOpacity,
-  });
+  const ColourPalette(
+      {required this.blue,
+      required this.orange,
+      required this.darkBlue,
+      required this.spunPearl,
+      required this.lightGrayishBlue,
+      required this.white,
+      required this.whiteWithOpacity,
+      required this.darkBlueWithOpacity,
+      required this.lightGrayishOrange});
 
   @override
-  ThemeExtension<ColourPalette> copyWith({
-    Color? blue,
-    Color? orange,
-    Color? darkBlue,
-    Color? spunPearl,
-    Color? lightGrayishBlue,
-    Color? white,
-    Color? whiteWithOpacity,
-    Color? darkBlueWithOpacity,
-  }) {
+  ThemeExtension<ColourPalette> copyWith(
+      {Color? blue,
+      Color? orange,
+      Color? darkBlue,
+      Color? spunPearl,
+      Color? lightGrayishBlue,
+      Color? white,
+      Color? whiteWithOpacity,
+      Color? darkBlueWithOpacity,
+      Color? lightGrayishOrange}) {
     return ColourPalette(
       blue: blue ?? this.blue,
       orange: orange ?? this.orange,
       darkBlue: darkBlue ?? this.darkBlue,
       spunPearl: spunPearl ?? this.spunPearl,
       lightGrayishBlue: lightGrayishBlue ?? this.lightGrayishBlue,
+      lightGrayishOrange: lightGrayishOrange ?? this.lightGrayishOrange,
       white: white ?? this.white,
       whiteWithOpacity: whiteWithOpacity ?? this.whiteWithOpacity,
       darkBlueWithOpacity: darkBlueWithOpacity ?? this.darkBlueWithOpacity,
@@ -58,6 +60,8 @@ class ColourPalette extends ThemeExtension<ColourPalette> {
       spunPearl: Color.lerp(spunPearl, other.spunPearl, t),
       lightGrayishBlue: Color.lerp(lightGrayishBlue, other.lightGrayishBlue, t),
       white: Color.lerp(white, other.white, t),
+      lightGrayishOrange:
+          Color.lerp(lightGrayishOrange, other.lightGrayishOrange, t),
       whiteWithOpacity: Color.lerp(whiteWithOpacity, other.whiteWithOpacity, t),
       darkBlueWithOpacity:
           Color.lerp(darkBlueWithOpacity, other.darkBlueWithOpacity, t),
@@ -73,5 +77,6 @@ class ColourPalette extends ThemeExtension<ColourPalette> {
     white: colorFromHex('#FFFFFF'),
     whiteWithOpacity: colorFromHex('#FFFFFF').withOpacity(0.1),
     darkBlueWithOpacity: colorFromHex('#171935').withOpacity(0.6),
+    lightGrayishOrange: colorFromHex('#fcdfaf'),
   );
 }
