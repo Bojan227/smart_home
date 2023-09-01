@@ -39,20 +39,17 @@ class RoomScreen extends StatelessWidget {
             children: [
               RoomHeader(title: room.name),
               const SizedBox(
-                height: 18,
+                height: 10,
               ),
               DevicesList(
                 devices: room.devices,
               ),
               const SizedBox(
-                height: 26,
+                height: 18,
               ),
               Align(
                 alignment: Alignment.center,
                 child: DeviceBox(device: room.devices[selectedDeviceIndex]),
-              ),
-              const SizedBox(
-                height: 26,
               ),
               const Align(
                 alignment: Alignment.center,
