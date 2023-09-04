@@ -5,6 +5,7 @@ import 'package:smart_home/presentation/ui/home/widgets/bottom_nav_bar.dart';
 import 'package:smart_home/presentation/ui/home/widgets/consumption_card.dart';
 import 'package:smart_home/presentation/ui/home/widgets/rooms_list.dart';
 import 'package:smart_home/presentation/ui/home/widgets/tab_row.dart';
+import 'package:smart_home/theme/colour_palette.dart';
 import 'package:smart_home/theme/main_config.dart';
 import 'package:smart_home/theme/text_theme.dart';
 
@@ -15,8 +16,18 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).extension<CustomTextTheme>()!;
     final mainConfig = Theme.of(context).extension<MainConfig>()!;
+    final colourPalette = Theme.of(context).extension<ColourPalette>()!;
 
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: colourPalette.blue,
+        shape: const CircleBorder(),
+        onPressed: () {},
+        tooltip: 'Add',
+        elevation: 0,
+        child: const Icon(Icons.add),
+      ),
       bottomNavigationBar: BlocProvider(
         create: (context) => TabCubit(),
         child: const BottomNavBar(),

@@ -22,29 +22,35 @@ class RoomsList extends StatelessWidget {
 
         if (state.roomsStatus == Status.success) {
           return Expanded(
-            child: GridView.builder(
-              itemCount: state.rooms.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return MultiBlocProvider(
-                          providers: [
-                            BlocProvider(create: (context) => TabCubit()),
-                            BlocProvider(
-                                create: (context) => TemperatureCubit()),
-                          ],
-                          child: RoomScreen(room: state.rooms[index]),
-                        );
-                      },
-                    ),
-                  );
-                },
-                child: RoomItem(roomEntity: state.rooms[index], index: index),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 32),
+              child: GridView.builder(
+                itemCount: state.rooms.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                ),
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return MultiBlocProvider(
+                            providers: [
+                              BlocProvider(
+                                create: (context) => TabCubit(),
+                              ),
+                              BlocProvider(
+                                create: (context) => TemperatureCubit(),
+                              ),
+                            ],
+                            child: RoomScreen(room: state.rooms[index]),
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  child: RoomItem(roomEntity: state.rooms[index], index: index),
+                ),
               ),
             ),
           );
