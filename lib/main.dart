@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     final RoomsBloc roomsBloc = getIt<RoomsBloc>();
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Smart Home',
       theme: ThemeData.light().copyWith(
           useMaterial3: true,

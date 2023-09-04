@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_home/presentation/blocs/home/cubit/tab_cubit.dart';
 import 'package:smart_home/presentation/ui/home/widgets/bottom_nav_bar.dart';
 import 'package:smart_home/presentation/ui/home/widgets/consumption_card.dart';
+import 'package:smart_home/presentation/ui/home/widgets/notification_icon.dart';
 import 'package:smart_home/presentation/ui/home/widgets/rooms_list.dart';
 import 'package:smart_home/presentation/ui/home/widgets/tab_row.dart';
 import 'package:smart_home/theme/colour_palette.dart';
@@ -41,12 +42,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CircleAvatar(),
-                  Icon(
-                    Icons.notifications_outlined,
-                  )
-                ],
+                children: [CircleAvatar(), NotificationIcon()],
               ),
               const SizedBox(
                 height: 18,
