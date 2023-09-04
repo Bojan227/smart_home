@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_home/domain/entities/room_entity.dart';
+import 'package:smart_home/presentation/blocs/home/cubit/speed_cubit.dart';
 import 'package:smart_home/presentation/blocs/home/cubit/tab_cubit.dart';
 import 'package:smart_home/presentation/ui/room/widgets/bottom_nav_container.dart';
 import 'package:smart_home/presentation/ui/room/widgets/device_box.dart';
 import 'package:smart_home/presentation/ui/room/widgets/devices_list.dart';
 import 'package:smart_home/presentation/ui/room/widgets/room_header.dart';
 import 'package:smart_home/presentation/ui/room/widgets/slider_box.dart';
+import 'package:smart_home/presentation/ui/room/widgets/speed_container.dart';
 import 'package:smart_home/presentation/ui/room/widgets/temperature_buttons.dart';
 import 'package:smart_home/theme/colour_palette.dart';
 import 'package:smart_home/theme/main_config.dart';
@@ -56,6 +58,10 @@ class RoomScreen extends StatelessWidget {
                 child: SliderBox(),
               ),
               const TemperatureButtons(),
+              BlocProvider(
+                create: (context) => SpeedCubit(),
+                child: const SpeedContainer(),
+              )
             ],
           ),
         ),
