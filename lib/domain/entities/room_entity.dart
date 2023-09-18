@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_home/domain/entities/device_entity.dart';
 
 class RoomEntity {
+  final int id;
   final String name;
   final int deviceCount;
   final bool status;
@@ -10,6 +11,7 @@ class RoomEntity {
   final List<DeviceEntity> devices;
 
   RoomEntity({
+    required this.id,
     required this.name,
     required this.deviceCount,
     required this.status,

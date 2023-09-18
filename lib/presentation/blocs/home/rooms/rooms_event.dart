@@ -21,3 +21,13 @@ class UpdateRoomStatus extends RoomsEvent {
   @override
   List<Object?> get props => [roomId];
 }
+
+class ReorderRooms extends RoomsEvent {
+  ReorderRooms({required this.oldIndex, required this.newIndex});
+
+  final int oldIndex;
+  final int newIndex;
+
+  @override
+  List<Object?> get props => [oldIndex, newIndex];
+}

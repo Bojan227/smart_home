@@ -21,6 +21,7 @@ class RoomsBloc extends Bloc<RoomsEvent, RoomsState> {
             updateStatus: Status.initial)) {
     on<GetRooms>(_onGetRooms);
     on<UpdateRoomStatus>(_onUpdateRoomStatus);
+    on<ReorderRooms>(_onReorderRooms);
   }
 
   Future<void> _onGetRooms(GetRooms event, Emitter emit) async {
@@ -43,7 +44,10 @@ class RoomsBloc extends Bloc<RoomsEvent, RoomsState> {
           await updateRoomStatusUseCase.updateRoomStatus(event.roomId);
 
       List<RoomEntity> copyRooms = List.from(state.rooms);
-      copyRooms[event.roomId] = room;
+      int itemIndex =
+          copyRooms.indexWhere((element) => element.id == event.roomId);
+
+      copyRooms[itemIndex] = room;
 
       emit(state.copyWith(
         updateStatus: Status.success,
@@ -51,6 +55,20 @@ class RoomsBloc extends Bloc<RoomsEvent, RoomsState> {
       ));
     } catch (_) {
       emit(state.copyWith(updateStatus: Status.failure));
+    }
+  }
+
+  Future<void> _onReorderRooms(ReorderRooms event, Emitter emit) async {
+    try {
+      List<RoomEntity> copyRooms = List.from(state.rooms);
+      final element = copyRooms.removeAt(event.oldIndex);
+      copyRooms.insert(event.newIndex, element);
+
+      emit(state.copyWith(
+        rooms: copyRooms,
+      ));
+    } catch (_) {
+      emit(state.copyWith(roomsStatus: Status.failure));
     }
   }
 }

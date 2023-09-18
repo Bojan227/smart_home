@@ -6,7 +6,6 @@ import 'package:smart_home/domain/entities/room_entity.dart';
 import 'package:smart_home/presentation/blocs/home/rooms/rooms_bloc.dart';
 import 'package:smart_home/presentation/ui/widgets/icon_bubble.dart';
 import 'package:smart_home/theme/colour_palette.dart';
-import 'package:smart_home/theme/main_config.dart';
 import 'package:smart_home/theme/text_theme.dart';
 
 List<Color> colors = [
@@ -30,10 +29,8 @@ class RoomItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final colourPalette = Theme.of(context).extension<ColourPalette>()!;
     final textTheme = Theme.of(context).extension<CustomTextTheme>()!;
-    final mainConfig = Theme.of(context).extension<MainConfig>()!;
 
     return Container(
-      padding: EdgeInsets.all(mainConfig.roomCardPadding!),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
       child: Column(
         children: [
@@ -69,7 +66,7 @@ class RoomItem extends StatelessWidget {
                 value: roomEntity.status,
                 onChanged: (value) {
                   context.read<RoomsBloc>().add(
-                        UpdateRoomStatus(roomId: index),
+                        UpdateRoomStatus(roomId: roomEntity.id),
                       );
                 },
                 activeColor: colourPalette.white,
@@ -80,7 +77,7 @@ class RoomItem extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: 24,
+            height: 22,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,

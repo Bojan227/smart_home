@@ -35,6 +35,7 @@ List<Device> devices = [
 
 List<Room> rooms = [
   Room(
+    id: 1,
     name: 'Bedroom',
     deviceCount: 6,
     status: false,
@@ -43,6 +44,7 @@ List<Room> rooms = [
     devices: devices,
   ),
   Room(
+    id: 2,
     name: 'Living Room',
     deviceCount: 12,
     status: true,
@@ -51,6 +53,7 @@ List<Room> rooms = [
     devices: devices,
   ),
   Room(
+    id: 3,
     name: 'Kitchen',
     deviceCount: 8,
     status: true,
@@ -59,6 +62,7 @@ List<Room> rooms = [
     devices: devices,
   ),
   Room(
+    id: 4,
     name: 'Bathroom',
     deviceCount: 3,
     status: true,
@@ -67,6 +71,7 @@ List<Room> rooms = [
     devices: devices,
   ),
   Room(
+    id: 5,
     name: 'Bathroom',
     deviceCount: 3,
     status: true,
@@ -82,6 +87,7 @@ class SmartHomeRepositoryImpl implements SmartHomeRepository {
     List<RoomEntity> roomsMapped = rooms.map(
       (room) {
         return RoomEntity(
+            id: room.id,
             name: room.name,
             deviceCount: room.deviceCount,
             status: room.status,
@@ -96,8 +102,11 @@ class SmartHomeRepositoryImpl implements SmartHomeRepository {
 
   @override
   Future<RoomEntity> updateStatus(int roomId) {
-    Room room = rooms[roomId];
+    int roomIndex = rooms.indexWhere((element) => element.id == roomId);
+    Room room = rooms[roomIndex];
+
     Room updatedRoom = Room(
+        id: room.id,
         name: room.name,
         deviceCount: room.deviceCount,
         status: !room.status,
@@ -105,8 +114,9 @@ class SmartHomeRepositoryImpl implements SmartHomeRepository {
         iconData: room.iconData,
         devices: devices);
 
-    rooms[roomId] = updatedRoom;
+    rooms[roomIndex] = updatedRoom;
     RoomEntity roomUpdated = RoomEntity(
+        id: room.id,
         name: room.name,
         deviceCount: room.deviceCount,
         status: !room.status,
@@ -127,5 +137,17 @@ class SmartHomeRepositoryImpl implements SmartHomeRepository {
             iconData: device.iconData,
             status: device.status))
         .toList();
+  }
+
+  @override
+  Future<DeviceEntity> updateDeviceStatus(int roomId, int deviceId) {
+    // TODO: implement updateDeviceStatus
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> reorderRooms(int oldIndex, int newIndex) async {
+    final element = rooms.removeAt(oldIndex);
+    rooms.insert(newIndex, element);
   }
 }
